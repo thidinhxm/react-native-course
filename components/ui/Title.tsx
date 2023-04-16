@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
-import { Text, StyleSheet } from 'react-native';
-import Colors from '../../constants/colors';
+import { Text, StyleSheet, Platform } from 'react-native';
 
 interface Props {
   children: ReactNode
@@ -20,8 +19,11 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Bold',
     color: 'white',
     textAlign: 'center',
-    borderWidth: 2,
+    // borderWidth: Platform.OS === 'android' ? 2 : 1,
+    borderWidth: Platform.select({android: 2, ios: 1}),
     borderColor: 'white',
     padding: 12,
+    maxWidth: '80%',
+    width: 300,
   }
 })

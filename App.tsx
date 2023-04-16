@@ -5,7 +5,7 @@
  * @format
  */
 
-import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import { StyleSheet, ImageBackground, SafeAreaView, StatusBar } from 'react-native';
 import StartGameScreen from './screens/StartGameScreen';
 import LinearGradient from 'react-native-linear-gradient';
 import { useState } from 'react';
@@ -49,19 +49,23 @@ function App(): JSX.Element {
   }
 
   return (
-    <LinearGradient 
-      style={styles.rootScreen}
-      colors={[Colors.primary700, Colors.accent500]}
-    >
-      <ImageBackground 
-        source={require('./assets/images/background.png')}
-        resizeMode='cover'
-        imageStyle={styles.styleImage}
+    <>
+      <StatusBar barStyle='light-content' />
+        <LinearGradient 
         style={styles.rootScreen}
+        colors={[Colors.primary700, Colors.accent500]}
       >
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground 
+          source={require('./assets/images/background.png')}
+          resizeMode='cover'
+          imageStyle={styles.styleImage}
+          style={styles.rootScreen}
+        >
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </>
+   
   )
 }
 
