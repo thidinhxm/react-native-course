@@ -5,65 +5,48 @@
  * @format
  */
 
-import { StyleSheet, ImageBackground, SafeAreaView, StatusBar } from 'react-native';
-import StartGameScreen from './screens/StartGameScreen';
-import LinearGradient from 'react-native-linear-gradient';
-import { useState } from 'react';
-import GameScreen from './screens/GameScreen';
-import Colors from './constants/colors';
-import GameOverScreen from './screens/GameOverScreen';
+import { StyleSheet, StatusBar } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native'
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import WelcomeScreen from './screens/WelcomeScreen';
+import UserScreen from './screens/UserScreen';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { RootDrawerParamList } from './types/navigation';
+
+const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
 function App(): JSX.Element {
-  const [userNumber, setUserNumber] = useState(0);
-  const [gameIsOver, setGameIsOver] = useState(true);
-  const [guessRounds, setGuessRounds] = useState(0);
-
-  function pickedNumberHandler(pickedNumber: number) {
-    setUserNumber(pickedNumber);
-    setGameIsOver(false);
-  }
-
-  function gameOverHandler(numberOfRounds: number) {
-    setGameIsOver(true);
-    setGuessRounds(numberOfRounds);
-  }
-
-  function startNewGameHandler() {
-    setUserNumber(0);
-    setGuessRounds(0);
-    screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
-  }
-
-  let screen = <StartGameScreen onPickNumber={pickedNumberHandler}/>;
-
-  if (userNumber) {
-    screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler}/>
-  }
-
-  if (gameIsOver && userNumber) {
-    screen = <GameOverScreen 
-      roundNumber={guessRounds}
-      userNumber={userNumber} 
-      onStartNewGame={startNewGameHandler}
-    />
-  }
 
   return (
     <>
       <StatusBar barStyle='light-content' />
-        <LinearGradient 
-        style={styles.rootScreen}
-        colors={[Colors.primary700, Colors.accent500]}
-      >
-        <ImageBackground 
-          source={require('./assets/images/background.png')}
-          resizeMode='cover'
-          imageStyle={styles.styleImage}
-          style={styles.rootScreen}
+      <NavigationContainer>
+        <Drawer.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: '#3c0a6b'},
+            headerTintColor: 'white',
+            drawerActiveBackgroundColor: '#f0e1ff',
+            drawerActiveTintColor: '#3c0a6b',
+            // drawerStyle: { backgroundColor: '#ccc'}
+          }}
         >
-          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-        </ImageBackground>
-      </LinearGradient>
+          <Drawer.Screen 
+            name='Welcome' 
+            component={WelcomeScreen} 
+            options={{
+              drawerLabel: 'Welcome Screen',
+              drawerIcon: ({ color, size }) => <Icon name='home' color={color} size={size} />
+            }}
+          />
+          <Drawer.Screen 
+            name='User' 
+            component={UserScreen} 
+            options={{
+              drawerIcon: ({ color, size }) => <Icon name='person' color={color} size={size} />
+            }}
+          />
+        </Drawer.Navigator>
+      </NavigationContainer>
     </>
    
   )
