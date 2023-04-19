@@ -1,14 +1,11 @@
 import { View, FlatList, StyleSheet } from 'react-native';
 import { CATEGORIES, MEALS } from '../data/dummy-data';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
+import { MealsOverviewScreenProps } from '../types/navigation';
 import Meal from '../models/meal';
 import MealItem from '../components/MealItem';
 import { useLayoutEffect } from 'react';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'MealsOverview'>;
-
-function MealsOverviewScreen({ route, navigation } : Props) {
+function MealsOverviewScreen({ route, navigation } : MealsOverviewScreenProps) {
   const categoryId = route.params.categoryId;
 
   const displayedMeals = MEALS.filter((meal) => meal.categoryIds.includes(categoryId));

@@ -1,6 +1,5 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Text, View, Image, StyleSheet, ScrollView } from "react-native"
-import { RootStackParamList } from "../types/navigation";
+import { MealDetailScreenProps } from "../types/navigation";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
@@ -8,9 +7,8 @@ import List from "../components/MealDetail/List";
 import { useLayoutEffect } from 'react';
 import IconButton from "../components/IconButton";
 
-type Props = NativeStackScreenProps<RootStackParamList, 'MealDetail'>;
 
-function MealDetailScreen({ route, navigation }: Props) {
+function MealDetailScreen({ route, navigation }: MealDetailScreenProps) {
   const mealId = route.params.mealId;
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
   
