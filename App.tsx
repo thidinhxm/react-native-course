@@ -15,7 +15,8 @@ import MealDetailScreen from './screens/MealDetailScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavoritesScreen from './screens/FavoritesScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FavoritesContextProvider from './store/context/FavoritesContextProvider';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Drawer = createDrawerNavigator<RootDrawerParamList>();
@@ -62,7 +63,7 @@ function App(): JSX.Element {
   return (
     <>
       <StatusBar barStyle='light-content' />
-      <FavoritesContextProvider>
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator 
             screenOptions={{
@@ -92,9 +93,7 @@ function App(): JSX.Element {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavoritesContextProvider>
-      
-    
+      </Provider>
     </>
    
   )
