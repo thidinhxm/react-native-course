@@ -1,26 +1,15 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { DrawerScreenProps } from '@react-navigation/drawer';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
 export type RootStackParamList = {
-  MealsOverview: { categoryId: string};
-  MealDetail: { mealId: string };
-  Drawer: undefined
+  ManageExpense: { expenseId: string };
+  ExpensesOverview: undefined;
 };
 
-export type RootDrawerParamList = {
-  Categories: undefined;
-  Favorites: undefined;
-  MealsOverview: { categoryId: string};
-}
+export type BottomTabsParamList = {
+  RecentExpenses: undefined;
+  AllExpenses: undefined;
+};
 
-export type CategoriesScreenProps = 
-DrawerScreenProps<RootDrawerParamList, 'Categories'>;
+export type ManageExpenseNavigationProp = NativeStackNavigationProp<RootStackParamList, 'ManageExpense'>;
 
-export type MealsCategoriesScreenProps = 
-  NativeStackScreenProps<RootStackParamList, 'MealsCategories'>;
-
-export type MealDetailScreenProps = 
-  NativeStackScreenProps<RootStackParamList, 'MealDetail'>;
-
-export type MealsOverviewScreenProps = 
-  NativeStackScreenProps<RootStackParamList, 'MealsOverview'>;
+export type ManageExpenseScreenProps = NativeStackScreenProps<RootStackParamList, 'ManageExpense'>;
